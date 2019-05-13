@@ -104,3 +104,47 @@ func newToken() string {
 	_, _ = rand.Read(b)
 	return fmt.Sprintf("%x", b)
 }
+
+type StartTraverse struct {
+	RootNode *actor.PID
+}
+
+type TraverseActor struct {
+	Instructor *actor.PID
+	Values     map[int]string
+	OpenNodes  int
+}
+
+func (currentActor *TraverseActor) Receive(context actor.Context) {
+	switch msg := context.Message().(type) {
+	case *StartTraverse:
+		fmt.Printf("Started Traversing from Actor\n")
+		context.Send(msg.RootNode, &tree.Traverse{Instructor: context.Self()})
+		currentActor.OpenNodes += currentActor.OpenNodes
+	case *tree.Data:
+		fmt.Printf("Traverse Actor got Data...\n")
+		currentActor.OpenNodes -= currentActor.OpenNodes
+		for k, v := range msg.Values {
+			currentActor.Values[k] = v
+		}
+		if msg.RightNode != nil {
+			fmt.Printf("Traverse Actor resending to right node...\n")
+			context.Send(msg.RightNode, &tree.Traverse{Instructor: context.Self()})
+			currentActor.OpenNodes += currentActor.OpenNodes
+		}
+		if msg.LeftNode != nil {
+			fmt.Printf("Traverse Actor resending to left node...\n")
+			context.Send(msg.LeftNode, &tree.Traverse{Instructor: context.Self()})
+			currentActor.OpenNodes += currentActor.OpenNodes
+		}
+		if currentActor.OpenNodes == 0 {
+			fmt.Printf("Traverse Actor responding full data to cli...\n")
+			result := make([]*messages.NodeData, 0)
+			for k, v := range currentActor.Values {
+				result = append(result, &messages.NodeData{Key: int32(k), Value: v})
+			}
+			context.Send(currentActor.Instructor, &messages.TraverseResult{Values: result})
+		}
+	}
+
+}

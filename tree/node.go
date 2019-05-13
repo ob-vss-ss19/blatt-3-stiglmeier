@@ -76,8 +76,8 @@ func (node *NodeActor) Receive(context actor.Context) {
 		}
 		context.Send(msg.Instructor, &messages.Success{})
 	case *Find:
+		fmt.Println("finding...")
 		if node.LeftNode != nil {
-
 			if node.LeftMaxKey <= msg.Key {
 				context.Send(node.LeftNode, msg)
 			} else {
@@ -96,6 +96,7 @@ func (node *NodeActor) Receive(context actor.Context) {
 			context.Send(msg.Instructor, &messages.Failure{Cause: "Node not found"})
 		}
 	case *Delete:
+		fmt.Println("deleting...")
 		node.Values = nil
 		if node.LeftNode != nil {
 			context.Send(node.LeftNode, msg)
@@ -104,6 +105,7 @@ func (node *NodeActor) Receive(context actor.Context) {
 		node.LeftNode = nil
 		node.RightNode = nil
 	case *Traverse:
+		fmt.Println("traversing...")
 		context.Send(msg.Instructor, &Data{LeftNode: node.LeftNode, RightNode: node.RightNode, Values: node.Values})
 	}
 
