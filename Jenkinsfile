@@ -7,8 +7,8 @@ pipeline {
             }
             steps {
                 sh 'cd messages && make regenerate'
-                sh 'go get -u github.com/ob-vss-ss19/blatt-3-stiglmeier/messages'
-                sh 'go get -u github.com/ob-vss-ss19/blatt-3-stiglmeier/tree'
+                sh 'go install -v github.com/ob-vss-ss19/blatt-3-stiglmeier/messages'
+                sh 'go install -v github.com/ob-vss-ss19/blatt-3-stiglmeier/tree'
                 sh 'cd treeservice && go build main.go'
                 sh 'cd treecli && go build main.go'
             }
