@@ -82,14 +82,17 @@ func (node *NodeActor) Receive(context actor.Context) {
 		fmt.Println("finding...")
 		if node.LeftNode != nil {
 			if node.LeftMaxKey <= msg.Key {
+				fmt.Println("Searching again on left side")
 				context.Send(node.LeftNode, msg)
 			} else {
+				fmt.Println("Searching again on right side")
 				context.Send(node.RightNode, msg)
 			}
 		} else {
 			for k, v := range node.Values {
+				fmt.Printf("Looking Through: key=%d, value=%s\n", k, v)
 				if k == msg.Key && v == msg.Value {
-					fmt.Printf("Looking Through: key=%d, value=%s", k, v)
+
 					if msg.Delete {
 						delete(node.Values, k)
 					}
