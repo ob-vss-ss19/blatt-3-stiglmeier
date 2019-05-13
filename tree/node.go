@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/AsynkronIT/protoactor-go/actor"
 	"github.com/ob-vss-ss19/blatt-3-stiglmeier/messages"
-	"github.com/ob-vss-ss19/blatt-3-stiglmeier/tree"
 	"sort"
 )
 
@@ -38,6 +37,7 @@ type NodeActor struct {
 func (node *NodeActor) Receive(context actor.Context) {
 	switch msg := context.Message().(type) {
 	case Add:
+		fmt.Println("adding...")
 		if node.LeftNode != nil { // no leaf
 			if msg.Key <= node.LeftMaxKey {
 				context.Send(node.LeftNode, msg)
@@ -52,10 +52,10 @@ func (node *NodeActor) Receive(context actor.Context) {
 			node.Values[msg.Key] = msg.Value
 
 			node.LeftNode = context.Spawn(actor.PropsFromProducer(func() actor.Actor {
-				return &tree.NodeActor{LeafSize: int(node.LeafSize)}
+				return &NodeActor{LeafSize: int(node.LeafSize)}
 			}))
 			node.RightNode = context.Spawn(actor.PropsFromProducer(func() actor.Actor {
-				return &tree.NodeActor{LeafSize: int(node.LeafSize)}
+				return &NodeActor{LeafSize: int(node.LeafSize)}
 			}))
 			sortedKeys := sortNode(node.Values)
 			node.LeftMaxKey = sortedKeys[(len(sortedKeys)/2)-1]
@@ -69,6 +69,8 @@ func (node *NodeActor) Receive(context actor.Context) {
 			node.Values = nil
 		}
 		context.Send(msg.Instructor, &messages.Success{})
+	default:
+		fmt.Println("invalid message type for node")
 	}
 
 }
