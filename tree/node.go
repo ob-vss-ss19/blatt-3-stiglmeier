@@ -70,7 +70,7 @@ func (node *NodeActor) Receive(context actor.Context) {
 		}
 		context.Send(msg.Instructor, &messages.Success{})
 	default:
-		fmt.Println("invalid message type for node")
+		fmt.Printf("invalid message type for node: %s\n", msg)
 	}
 
 }
