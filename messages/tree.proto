@@ -15,22 +15,25 @@ message DeleteTree{
     int32 id = 2;
 }
 
-message NewNumber{
+message AddPair{
     string token = 1;
     int32 id = 2;
-    string value = 3;
+    int32 key = 3;
+    string value = 4;
 }
 
-message DeleteNumber{
+message RemovePair{
     string token = 1;
     int32 id = 2;
-    string value = 3;
+    int32 key = 3;
+    string value = 4;
 }
 
-message ExistsNumber{
+message FindPair{
     string token = 1;
     int32 id = 2;
-    string value = 3;
+    int32 key = 3;
+    string value = 4;
 }
 
 message TraverseTree{

@@ -1,11 +1,13 @@
 package tree
 
-import "github.com/AsynkronIT/protoactor-go/actor"
+import (
+	"github.com/AsynkronIT/protoactor-go/actor"
+)
 
 type Add struct {
 	Instructor *actor.PID
-	Key        int
 	Value      string
+	Key        int
 }
 
 type Find struct {
@@ -29,8 +31,13 @@ type NodeActor struct {
 	Values     map[int]string
 }
 
-func (state *NodeActor) Receive(context actor.Context) {
-	//switch msg := context.Message().(type) {
-	//case :
+func (node *NodeActor) Receive(context actor.Context) {
+	switch context.Message().(type) {
+	case Add:
+		if node.LeftNode != nil { // no leaf
+			//if(msg.)
+			//context.Send(node)
+		}
+	}
 
 }

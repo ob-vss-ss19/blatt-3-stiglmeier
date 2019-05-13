@@ -168,23 +168,24 @@ func (m *DeleteTree) GetId() int32 {
 	return 0
 }
 
-type NewNumber struct {
+type AddPair struct {
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	Id    int32  `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Value string `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	Key   int32  `protobuf:"varint,3,opt,name=key,proto3" json:"key,omitempty"`
+	Value string `protobuf:"bytes,4,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (m *NewNumber) Reset()      { *m = NewNumber{} }
-func (*NewNumber) ProtoMessage() {}
-func (*NewNumber) Descriptor() ([]byte, []int) {
+func (m *AddPair) Reset()      { *m = AddPair{} }
+func (*AddPair) ProtoMessage() {}
+func (*AddPair) Descriptor() ([]byte, []int) {
 	return fileDescriptor_cb3889276909882a, []int{3}
 }
-func (m *NewNumber) XXX_Unmarshal(b []byte) error {
+func (m *AddPair) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *NewNumber) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *AddPair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_NewNumber.Marshal(b, m, deterministic)
+		return xxx_messageInfo_AddPair.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalTo(b)
@@ -194,56 +195,64 @@ func (m *NewNumber) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (m *NewNumber) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NewNumber.Merge(m, src)
+func (m *AddPair) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AddPair.Merge(m, src)
 }
-func (m *NewNumber) XXX_Size() int {
+func (m *AddPair) XXX_Size() int {
 	return m.Size()
 }
-func (m *NewNumber) XXX_DiscardUnknown() {
-	xxx_messageInfo_NewNumber.DiscardUnknown(m)
+func (m *AddPair) XXX_DiscardUnknown() {
+	xxx_messageInfo_AddPair.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_NewNumber proto.InternalMessageInfo
+var xxx_messageInfo_AddPair proto.InternalMessageInfo
 
-func (m *NewNumber) GetToken() string {
+func (m *AddPair) GetToken() string {
 	if m != nil {
 		return m.Token
 	}
 	return ""
 }
 
-func (m *NewNumber) GetId() int32 {
+func (m *AddPair) GetId() int32 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
-func (m *NewNumber) GetValue() string {
+func (m *AddPair) GetKey() int32 {
+	if m != nil {
+		return m.Key
+	}
+	return 0
+}
+
+func (m *AddPair) GetValue() string {
 	if m != nil {
 		return m.Value
 	}
 	return ""
 }
 
-type DeleteNumber struct {
+type RemovePair struct {
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	Id    int32  `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Value string `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	Key   int32  `protobuf:"varint,3,opt,name=key,proto3" json:"key,omitempty"`
+	Value string `protobuf:"bytes,4,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (m *DeleteNumber) Reset()      { *m = DeleteNumber{} }
-func (*DeleteNumber) ProtoMessage() {}
-func (*DeleteNumber) Descriptor() ([]byte, []int) {
+func (m *RemovePair) Reset()      { *m = RemovePair{} }
+func (*RemovePair) ProtoMessage() {}
+func (*RemovePair) Descriptor() ([]byte, []int) {
 	return fileDescriptor_cb3889276909882a, []int{4}
 }
-func (m *DeleteNumber) XXX_Unmarshal(b []byte) error {
+func (m *RemovePair) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *DeleteNumber) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *RemovePair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_DeleteNumber.Marshal(b, m, deterministic)
+		return xxx_messageInfo_RemovePair.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalTo(b)
@@ -253,56 +262,64 @@ func (m *DeleteNumber) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return b[:n], nil
 	}
 }
-func (m *DeleteNumber) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DeleteNumber.Merge(m, src)
+func (m *RemovePair) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RemovePair.Merge(m, src)
 }
-func (m *DeleteNumber) XXX_Size() int {
+func (m *RemovePair) XXX_Size() int {
 	return m.Size()
 }
-func (m *DeleteNumber) XXX_DiscardUnknown() {
-	xxx_messageInfo_DeleteNumber.DiscardUnknown(m)
+func (m *RemovePair) XXX_DiscardUnknown() {
+	xxx_messageInfo_RemovePair.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_DeleteNumber proto.InternalMessageInfo
+var xxx_messageInfo_RemovePair proto.InternalMessageInfo
 
-func (m *DeleteNumber) GetToken() string {
+func (m *RemovePair) GetToken() string {
 	if m != nil {
 		return m.Token
 	}
 	return ""
 }
 
-func (m *DeleteNumber) GetId() int32 {
+func (m *RemovePair) GetId() int32 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
-func (m *DeleteNumber) GetValue() string {
+func (m *RemovePair) GetKey() int32 {
+	if m != nil {
+		return m.Key
+	}
+	return 0
+}
+
+func (m *RemovePair) GetValue() string {
 	if m != nil {
 		return m.Value
 	}
 	return ""
 }
 
-type ExistsNumber struct {
+type FindPair struct {
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	Id    int32  `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-	Value string `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	Key   int32  `protobuf:"varint,3,opt,name=key,proto3" json:"key,omitempty"`
+	Value string `protobuf:"bytes,4,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (m *ExistsNumber) Reset()      { *m = ExistsNumber{} }
-func (*ExistsNumber) ProtoMessage() {}
-func (*ExistsNumber) Descriptor() ([]byte, []int) {
+func (m *FindPair) Reset()      { *m = FindPair{} }
+func (*FindPair) ProtoMessage() {}
+func (*FindPair) Descriptor() ([]byte, []int) {
 	return fileDescriptor_cb3889276909882a, []int{5}
 }
-func (m *ExistsNumber) XXX_Unmarshal(b []byte) error {
+func (m *FindPair) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *ExistsNumber) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *FindPair) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_ExistsNumber.Marshal(b, m, deterministic)
+		return xxx_messageInfo_FindPair.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalTo(b)
@@ -312,33 +329,40 @@ func (m *ExistsNumber) XXX_Marshal(b []byte, deterministic bool) ([]byte, error)
 		return b[:n], nil
 	}
 }
-func (m *ExistsNumber) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ExistsNumber.Merge(m, src)
+func (m *FindPair) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FindPair.Merge(m, src)
 }
-func (m *ExistsNumber) XXX_Size() int {
+func (m *FindPair) XXX_Size() int {
 	return m.Size()
 }
-func (m *ExistsNumber) XXX_DiscardUnknown() {
-	xxx_messageInfo_ExistsNumber.DiscardUnknown(m)
+func (m *FindPair) XXX_DiscardUnknown() {
+	xxx_messageInfo_FindPair.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_ExistsNumber proto.InternalMessageInfo
+var xxx_messageInfo_FindPair proto.InternalMessageInfo
 
-func (m *ExistsNumber) GetToken() string {
+func (m *FindPair) GetToken() string {
 	if m != nil {
 		return m.Token
 	}
 	return ""
 }
 
-func (m *ExistsNumber) GetId() int32 {
+func (m *FindPair) GetId() int32 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
-func (m *ExistsNumber) GetValue() string {
+func (m *FindPair) GetKey() int32 {
+	if m != nil {
+		return m.Key
+	}
+	return 0
+}
+
+func (m *FindPair) GetValue() string {
 	if m != nil {
 		return m.Value
 	}
@@ -537,9 +561,9 @@ func init() {
 	proto.RegisterType((*TreeData)(nil), "messages.TreeData")
 	proto.RegisterType((*NewTree)(nil), "messages.NewTree")
 	proto.RegisterType((*DeleteTree)(nil), "messages.DeleteTree")
-	proto.RegisterType((*NewNumber)(nil), "messages.NewNumber")
-	proto.RegisterType((*DeleteNumber)(nil), "messages.DeleteNumber")
-	proto.RegisterType((*ExistsNumber)(nil), "messages.ExistsNumber")
+	proto.RegisterType((*AddPair)(nil), "messages.AddPair")
+	proto.RegisterType((*RemovePair)(nil), "messages.RemovePair")
+	proto.RegisterType((*FindPair)(nil), "messages.FindPair")
 	proto.RegisterType((*TraverseTree)(nil), "messages.TraverseTree")
 	proto.RegisterType((*Failure)(nil), "messages.Failure")
 	proto.RegisterType((*Success)(nil), "messages.Success")
@@ -549,27 +573,28 @@ func init() {
 func init() { proto.RegisterFile("tree.proto", fileDescriptor_cb3889276909882a) }
 
 var fileDescriptor_cb3889276909882a = []byte{
-	// 318 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x92, 0xcf, 0x4a, 0x42, 0x41,
-	0x14, 0xc6, 0x67, 0xae, 0x99, 0x7a, 0x12, 0x89, 0xa1, 0x85, 0xab, 0x93, 0xcc, 0x4a, 0x08, 0x22,
-	0xca, 0x27, 0x08, 0x2b, 0x08, 0x71, 0x71, 0xf5, 0x05, 0x46, 0x3d, 0xc5, 0xc5, 0x6b, 0xc6, 0xfc,
-	0x51, 0x6b, 0xd5, 0x23, 0xf4, 0x18, 0x3d, 0x4a, 0x4b, 0x97, 0x2e, 0x73, 0xdc, 0xb4, 0xf4, 0x11,
-	0xc2, 0x31, 0xc9, 0xa5, 0x81, 0xbb, 0xf3, 0x0d, 0xdf, 0xef, 0x7c, 0x1f, 0x33, 0x03, 0x60, 0x35,
-	0xd1, 0xf9, 0xb3, 0x1e, 0xda, 0xa1, 0xc8, 0x0f, 0xc8, 0x18, 0xf5, 0x48, 0x46, 0x5e, 0x40, 0xbe,
-	0xad, 0x89, 0xea, 0xca, 0x2a, 0x71, 0x02, 0x59, 0x3b, 0xec, 0xd3, 0x53, 0x99, 0x57, 0x78, 0xb5,
-	0x10, 0xaf, 0x85, 0x28, 0x41, 0x94, 0xf4, 0xca, 0x51, 0x85, 0x57, 0xb3, 0x71, 0x94, 0xf4, 0xe4,
-	0x19, 0xe4, 0x9a, 0x34, 0x5e, 0x41, 0xa2, 0x02, 0x47, 0x03, 0x35, 0x69, 0x90, 0x7a, 0x68, 0x25,
-	0xaf, 0x14, 0xb0, 0x6c, 0xbc, 0x7d, 0x24, 0x2f, 0x01, 0xea, 0x94, 0x92, 0xa5, 0xe0, 0xdf, 0x2d,
-	0xe0, 0x0e, 0x0a, 0x4d, 0x1a, 0x37, 0xdd, 0xa0, 0x43, 0x7a, 0x37, 0x64, 0xe5, 0x1a, 0xa9, 0xd4,
-	0x51, 0x39, 0xb3, 0x76, 0x05, 0x21, 0xef, 0xa1, 0xb8, 0x0e, 0xdf, 0xcf, 0xae, 0x9b, 0x49, 0x62,
-	0xac, 0xd9, 0xc3, 0xae, 0x1a, 0x14, 0xdb, 0x5a, 0x8d, 0x48, 0x9b, 0xff, 0x5c, 0xcb, 0x29, 0xe4,
-	0x6e, 0x55, 0x92, 0x3a, 0x1d, 0x80, 0xae, 0x72, 0x86, 0x36, 0x40, 0x10, 0xb2, 0x00, 0xb9, 0x96,
-	0xeb, 0x76, 0xc9, 0x18, 0xd9, 0x80, 0xd2, 0x26, 0x21, 0x26, 0xe3, 0x52, 0x2b, 0x8e, 0x21, 0xd3,
-	0xa7, 0x97, 0xdf, 0x27, 0x5a, 0x8d, 0x7f, 0xdd, 0xa2, 0xad, 0x6e, 0x42, 0xc0, 0x41, 0xaa, 0x8c,
-	0x0d, 0x85, 0xf3, 0x71, 0x98, 0xaf, 0x6b, 0xd3, 0x39, 0xb2, 0xd9, 0x1c, 0xd9, 0x72, 0x8e, 0xfc,
-	0xcd, 0x23, 0xff, 0xf0, 0xc8, 0x3f, 0x3d, 0xf2, 0xa9, 0x47, 0xfe, 0xe5, 0x91, 0x7f, 0x7b, 0x64,
-	0x4b, 0x8f, 0xfc, 0x7d, 0x81, 0x6c, 0xba, 0x40, 0x36, 0x5b, 0x20, 0xeb, 0x1c, 0x86, 0xaf, 0x76,
-	0xf5, 0x13, 0x00, 0x00, 0xff, 0xff, 0x94, 0x17, 0x73, 0x0b, 0x78, 0x02, 0x00, 0x00,
+	// 328 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x92, 0xbf, 0x4e, 0x3a, 0x41,
+	0x10, 0xc7, 0x6f, 0x0f, 0xf8, 0xdd, 0x31, 0x3f, 0x43, 0xcc, 0xc6, 0xe2, 0xaa, 0x91, 0x5c, 0x45,
+	0x62, 0x62, 0x8c, 0xf2, 0x02, 0x1a, 0x42, 0x45, 0x8c, 0x39, 0x48, 0x34, 0x76, 0x2b, 0x37, 0x9a,
+	0x0d, 0x07, 0x67, 0x76, 0xf7, 0xf0, 0x4f, 0xe5, 0x23, 0xf8, 0x18, 0x3e, 0x8a, 0x25, 0x25, 0xa5,
+	0x2c, 0x8d, 0x25, 0x8f, 0x60, 0x58, 0x42, 0x42, 0x61, 0x81, 0x05, 0xdd, 0x7c, 0x27, 0xfb, 0xd9,
+	0xf9, 0xec, 0x66, 0x00, 0x8c, 0x22, 0x3a, 0x7e, 0x54, 0xb9, 0xc9, 0x79, 0x38, 0x24, 0xad, 0xc5,
+	0x03, 0xe9, 0xf8, 0x04, 0xc2, 0x9e, 0x22, 0x6a, 0x09, 0x23, 0xf8, 0x01, 0x54, 0x4c, 0x3e, 0xa0,
+	0x51, 0xc4, 0xea, 0xac, 0x51, 0x4d, 0x56, 0x81, 0xd7, 0xc0, 0x97, 0x69, 0xe4, 0xd7, 0x59, 0xa3,
+	0x92, 0xf8, 0x32, 0x8d, 0x8f, 0x20, 0xb8, 0xa4, 0xa7, 0x25, 0xc4, 0xeb, 0xf0, 0x7f, 0x28, 0x9e,
+	0x3b, 0x24, 0xee, 0xbb, 0xf2, 0x95, 0x1c, 0x56, 0x49, 0x36, 0x5b, 0xf1, 0x29, 0x40, 0x8b, 0x32,
+	0x32, 0xe4, 0xce, 0x6f, 0x37, 0xe0, 0x1a, 0x82, 0xf3, 0x34, 0xbd, 0x12, 0x52, 0x6d, 0x07, 0xf0,
+	0x7d, 0x28, 0x0d, 0xe8, 0x25, 0x2a, 0xb9, 0xc6, 0xb2, 0x5c, 0x72, 0x63, 0x91, 0x15, 0x14, 0x95,
+	0x57, 0x9c, 0x0b, 0xf1, 0x2d, 0x40, 0x42, 0xc3, 0x7c, 0x4c, 0x3b, 0xb8, 0xfb, 0x06, 0xc2, 0xb6,
+	0x1c, 0xed, 0xc2, 0xba, 0x09, 0x7b, 0x3d, 0x25, 0xc6, 0xa4, 0xf4, 0x5f, 0x3e, 0xf1, 0x10, 0x82,
+	0xb6, 0x90, 0x59, 0xa1, 0x1c, 0xd0, 0x17, 0x85, 0xa6, 0x35, 0xe0, 0x42, 0x5c, 0x85, 0xa0, 0x5b,
+	0xf4, 0xfb, 0xa4, 0x75, 0xdc, 0x81, 0xda, 0x7a, 0x42, 0x42, 0xba, 0xc8, 0xcc, 0xda, 0x8d, 0xfd,
+	0xe2, 0xe6, 0x6f, 0xb8, 0x71, 0x0e, 0xe5, 0x4c, 0x68, 0xe3, 0x1e, 0x11, 0x26, 0xae, 0xbe, 0x68,
+	0x4e, 0x66, 0xe8, 0x4d, 0x67, 0xe8, 0x2d, 0x66, 0xc8, 0xde, 0x2c, 0xb2, 0x0f, 0x8b, 0xec, 0xd3,
+	0x22, 0x9b, 0x58, 0x64, 0x5f, 0x16, 0xd9, 0xb7, 0x45, 0x6f, 0x61, 0x91, 0xbd, 0xcf, 0xd1, 0x9b,
+	0xcc, 0xd1, 0x9b, 0xce, 0xd1, 0xbb, 0xfb, 0xe7, 0x16, 0xf3, 0xec, 0x27, 0x00, 0x00, 0xff, 0xff,
+	0x38, 0x28, 0xd0, 0x15, 0xa6, 0x02, 0x00, 0x00,
 }
 
 func (this *TreeData) Equal(that interface{}) bool {
@@ -650,14 +675,14 @@ func (this *DeleteTree) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *NewNumber) Equal(that interface{}) bool {
+func (this *AddPair) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*NewNumber)
+	that1, ok := that.(*AddPair)
 	if !ok {
-		that2, ok := that.(NewNumber)
+		that2, ok := that.(AddPair)
 		if ok {
 			that1 = &that2
 		} else {
@@ -673,6 +698,9 @@ func (this *NewNumber) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Id != that1.Id {
+		return false
+	}
+	if this.Key != that1.Key {
 		return false
 	}
 	if this.Value != that1.Value {
@@ -680,14 +708,14 @@ func (this *NewNumber) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *DeleteNumber) Equal(that interface{}) bool {
+func (this *RemovePair) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*DeleteNumber)
+	that1, ok := that.(*RemovePair)
 	if !ok {
-		that2, ok := that.(DeleteNumber)
+		that2, ok := that.(RemovePair)
 		if ok {
 			that1 = &that2
 		} else {
@@ -703,6 +731,9 @@ func (this *DeleteNumber) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Id != that1.Id {
+		return false
+	}
+	if this.Key != that1.Key {
 		return false
 	}
 	if this.Value != that1.Value {
@@ -710,14 +741,14 @@ func (this *DeleteNumber) Equal(that interface{}) bool {
 	}
 	return true
 }
-func (this *ExistsNumber) Equal(that interface{}) bool {
+func (this *FindPair) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*ExistsNumber)
+	that1, ok := that.(*FindPair)
 	if !ok {
-		that2, ok := that.(ExistsNumber)
+		that2, ok := that.(FindPair)
 		if ok {
 			that1 = &that2
 		} else {
@@ -733,6 +764,9 @@ func (this *ExistsNumber) Equal(that interface{}) bool {
 		return false
 	}
 	if this.Id != that1.Id {
+		return false
+	}
+	if this.Key != that1.Key {
 		return false
 	}
 	if this.Value != that1.Value {
@@ -874,38 +908,41 @@ func (this *DeleteTree) GoString() string {
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *NewNumber) GoString() string {
+func (this *AddPair) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 7)
-	s = append(s, "&messages.NewNumber{")
+	s := make([]string, 0, 8)
+	s = append(s, "&messages.AddPair{")
 	s = append(s, "Token: "+fmt.Sprintf("%#v", this.Token)+",\n")
 	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	s = append(s, "Key: "+fmt.Sprintf("%#v", this.Key)+",\n")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *DeleteNumber) GoString() string {
+func (this *RemovePair) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 7)
-	s = append(s, "&messages.DeleteNumber{")
+	s := make([]string, 0, 8)
+	s = append(s, "&messages.RemovePair{")
 	s = append(s, "Token: "+fmt.Sprintf("%#v", this.Token)+",\n")
 	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	s = append(s, "Key: "+fmt.Sprintf("%#v", this.Key)+",\n")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
 }
-func (this *ExistsNumber) GoString() string {
+func (this *FindPair) GoString() string {
 	if this == nil {
 		return "nil"
 	}
-	s := make([]string, 0, 7)
-	s = append(s, "&messages.ExistsNumber{")
+	s := make([]string, 0, 8)
+	s = append(s, "&messages.FindPair{")
 	s = append(s, "Token: "+fmt.Sprintf("%#v", this.Token)+",\n")
 	s = append(s, "Id: "+fmt.Sprintf("%#v", this.Id)+",\n")
+	s = append(s, "Key: "+fmt.Sprintf("%#v", this.Key)+",\n")
 	s = append(s, "Value: "+fmt.Sprintf("%#v", this.Value)+",\n")
 	s = append(s, "}")
 	return strings.Join(s, "")
@@ -1041,7 +1078,7 @@ func (m *DeleteTree) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
-func (m *NewNumber) Marshal() (dAtA []byte, err error) {
+func (m *AddPair) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -1051,7 +1088,7 @@ func (m *NewNumber) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *NewNumber) MarshalTo(dAtA []byte) (int, error) {
+func (m *AddPair) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1067,8 +1104,13 @@ func (m *NewNumber) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintTree(dAtA, i, uint64(m.Id))
 	}
+	if m.Key != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintTree(dAtA, i, uint64(m.Key))
+	}
 	if len(m.Value) > 0 {
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x22
 		i++
 		i = encodeVarintTree(dAtA, i, uint64(len(m.Value)))
 		i += copy(dAtA[i:], m.Value)
@@ -1076,7 +1118,7 @@ func (m *NewNumber) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
-func (m *DeleteNumber) Marshal() (dAtA []byte, err error) {
+func (m *RemovePair) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -1086,7 +1128,7 @@ func (m *DeleteNumber) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *DeleteNumber) MarshalTo(dAtA []byte) (int, error) {
+func (m *RemovePair) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1102,8 +1144,13 @@ func (m *DeleteNumber) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintTree(dAtA, i, uint64(m.Id))
 	}
+	if m.Key != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintTree(dAtA, i, uint64(m.Key))
+	}
 	if len(m.Value) > 0 {
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x22
 		i++
 		i = encodeVarintTree(dAtA, i, uint64(len(m.Value)))
 		i += copy(dAtA[i:], m.Value)
@@ -1111,7 +1158,7 @@ func (m *DeleteNumber) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
-func (m *ExistsNumber) Marshal() (dAtA []byte, err error) {
+func (m *FindPair) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalTo(dAtA)
@@ -1121,7 +1168,7 @@ func (m *ExistsNumber) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ExistsNumber) MarshalTo(dAtA []byte) (int, error) {
+func (m *FindPair) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
 	var l int
@@ -1137,8 +1184,13 @@ func (m *ExistsNumber) MarshalTo(dAtA []byte) (int, error) {
 		i++
 		i = encodeVarintTree(dAtA, i, uint64(m.Id))
 	}
+	if m.Key != 0 {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintTree(dAtA, i, uint64(m.Key))
+	}
 	if len(m.Value) > 0 {
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x22
 		i++
 		i = encodeVarintTree(dAtA, i, uint64(len(m.Value)))
 		i += copy(dAtA[i:], m.Value)
@@ -1309,7 +1361,7 @@ func (m *DeleteTree) Size() (n int) {
 	return n
 }
 
-func (m *NewNumber) Size() (n int) {
+func (m *AddPair) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1321,6 +1373,9 @@ func (m *NewNumber) Size() (n int) {
 	}
 	if m.Id != 0 {
 		n += 1 + sovTree(uint64(m.Id))
+	}
+	if m.Key != 0 {
+		n += 1 + sovTree(uint64(m.Key))
 	}
 	l = len(m.Value)
 	if l > 0 {
@@ -1329,7 +1384,7 @@ func (m *NewNumber) Size() (n int) {
 	return n
 }
 
-func (m *DeleteNumber) Size() (n int) {
+func (m *RemovePair) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1341,6 +1396,9 @@ func (m *DeleteNumber) Size() (n int) {
 	}
 	if m.Id != 0 {
 		n += 1 + sovTree(uint64(m.Id))
+	}
+	if m.Key != 0 {
+		n += 1 + sovTree(uint64(m.Key))
 	}
 	l = len(m.Value)
 	if l > 0 {
@@ -1349,7 +1407,7 @@ func (m *DeleteNumber) Size() (n int) {
 	return n
 }
 
-func (m *ExistsNumber) Size() (n int) {
+func (m *FindPair) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1361,6 +1419,9 @@ func (m *ExistsNumber) Size() (n int) {
 	}
 	if m.Id != 0 {
 		n += 1 + sovTree(uint64(m.Id))
+	}
+	if m.Key != 0 {
+		n += 1 + sovTree(uint64(m.Key))
 	}
 	l = len(m.Value)
 	if l > 0 {
@@ -1471,37 +1532,40 @@ func (this *DeleteTree) String() string {
 	}, "")
 	return s
 }
-func (this *NewNumber) String() string {
+func (this *AddPair) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&NewNumber{`,
+	s := strings.Join([]string{`&AddPair{`,
 		`Token:` + fmt.Sprintf("%v", this.Token) + `,`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *DeleteNumber) String() string {
+func (this *RemovePair) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&DeleteNumber{`,
+	s := strings.Join([]string{`&RemovePair{`,
 		`Token:` + fmt.Sprintf("%v", this.Token) + `,`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
 		`}`,
 	}, "")
 	return s
 }
-func (this *ExistsNumber) String() string {
+func (this *FindPair) String() string {
 	if this == nil {
 		return "nil"
 	}
-	s := strings.Join([]string{`&ExistsNumber{`,
+	s := strings.Join([]string{`&FindPair{`,
 		`Token:` + fmt.Sprintf("%v", this.Token) + `,`,
 		`Id:` + fmt.Sprintf("%v", this.Id) + `,`,
+		`Key:` + fmt.Sprintf("%v", this.Key) + `,`,
 		`Value:` + fmt.Sprintf("%v", this.Value) + `,`,
 		`}`,
 	}, "")
@@ -1837,7 +1901,7 @@ func (m *DeleteTree) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *NewNumber) Unmarshal(dAtA []byte) error {
+func (m *AddPair) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1860,10 +1924,10 @@ func (m *NewNumber) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: NewNumber: wiretype end group for non-group")
+			return fmt.Errorf("proto: AddPair: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: NewNumber: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AddPair: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1918,6 +1982,25 @@ func (m *NewNumber) Unmarshal(dAtA []byte) error {
 				}
 			}
 		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Key", wireType)
+			}
+			m.Key = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTree
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Key |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
 			}
@@ -1973,7 +2056,7 @@ func (m *NewNumber) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *DeleteNumber) Unmarshal(dAtA []byte) error {
+func (m *RemovePair) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1996,10 +2079,10 @@ func (m *DeleteNumber) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: DeleteNumber: wiretype end group for non-group")
+			return fmt.Errorf("proto: RemovePair: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DeleteNumber: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: RemovePair: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2054,6 +2137,25 @@ func (m *DeleteNumber) Unmarshal(dAtA []byte) error {
 				}
 			}
 		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Key", wireType)
+			}
+			m.Key = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTree
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Key |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
 			}
@@ -2109,7 +2211,7 @@ func (m *DeleteNumber) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ExistsNumber) Unmarshal(dAtA []byte) error {
+func (m *FindPair) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2132,10 +2234,10 @@ func (m *ExistsNumber) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ExistsNumber: wiretype end group for non-group")
+			return fmt.Errorf("proto: FindPair: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ExistsNumber: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: FindPair: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2190,6 +2292,25 @@ func (m *ExistsNumber) Unmarshal(dAtA []byte) error {
 				}
 			}
 		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Key", wireType)
+			}
+			m.Key = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTree
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Key |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
 			}
