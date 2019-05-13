@@ -52,23 +52,35 @@ func (node *NodeActor) Receive(context actor.Context) {
 			node.Values[msg.Key] = msg.Value
 
 			node.LeftNode = context.Spawn(actor.PropsFromProducer(func() actor.Actor {
-				return &NodeActor{LeafSize: int(node.LeafSize)}
+				return &NodeActor{LeafSize: int(node.LeafSize), LeftNode: nil, RightNode: nil, Values: make(map[int]string)}
 			}))
 			node.RightNode = context.Spawn(actor.PropsFromProducer(func() actor.Actor {
-				return &NodeActor{LeafSize: int(node.LeafSize)}
+				return &NodeActor{LeafSize: int(node.LeafSize), LeftNode: nil, RightNode: nil, Values: make(map[int]string)}
 			}))
 			sortedKeys := sortNode(node.Values)
 			node.LeftMaxKey = sortedKeys[(len(sortedKeys)/2)-1]
 			for k, v := range node.Values {
 				if k <= sortedKeys[(len(sortedKeys)/2)-1] {
-					context.Send(node.LeftNode, Add{Instructor: context.Self(), Key: k, Value: v})
+					context.Send(node.LeftNode, &Add{Instructor: context.Self(), Key: k, Value: v})
 				} else {
-					context.Send(node.LeftNode, Add{Instructor: context.Self(), Key: k, Value: v})
+					context.Send(node.RightNode, &Add{Instructor: context.Self(), Key: k, Value: v})
 				}
 			}
 			node.Values = nil
 		}
 		context.Send(msg.Instructor, &messages.Success{})
+	case Find:
+		if node.LeftNode != nil {
+			context.Send(node.LeftNode, msg)
+			context.Send(node.RightNode, msg)
+			return
+		}
+		for k, v := range node.Values {
+			if k == msg.Key && v == msg.Value {
+				context.Send(msg.Instructor, &messages.Success{})
+			}
+		}
+
 	default:
 		fmt.Printf("invalid message type for node: %s\n", msg)
 	}
