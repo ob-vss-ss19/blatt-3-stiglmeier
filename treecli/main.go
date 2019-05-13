@@ -24,8 +24,8 @@ func (state *CliActor) Receive(context actor.Context) {
 		fmt.Printf("Failure: " + msg.Cause + "\n")
 		wg.Done()
 	case *messages.TraverseResult:
-		for k, v := range msg.Values {
-			fmt.Printf("Node[id=%d, value=%s]\n", k, v)
+		for _, v := range msg.Values {
+			fmt.Printf("Node[id=%d, value=%s]\n", v.Key, v.Value)
 		}
 		wg.Done()
 	case *messages.TreeData:

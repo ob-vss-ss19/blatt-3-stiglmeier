@@ -8,6 +8,7 @@ import (
 	"github.com/AsynkronIT/protoactor-go/remote"
 	"github.com/ob-vss-ss19/blatt-3-stiglmeier/messages"
 	"github.com/ob-vss-ss19/blatt-3-stiglmeier/tree"
+	"sort"
 	"sync"
 )
 
@@ -140,11 +141,22 @@ func (currentActor *TraverseActor) Receive(context actor.Context) {
 		if currentActor.OpenNodes == 0 {
 			fmt.Printf("Traverse Actor responding full data to cli...\n")
 			result := make([]*messages.NodeData, 0)
-			for k, v := range currentActor.Values {
-				result = append(result, &messages.NodeData{Key: int32(k), Value: v})
+
+			sorted := sortValues(currentActor.Values)
+			for _, v := range sorted {
+				result = append(result, &messages.NodeData{Key: int32(v), Value: currentActor.Values[v]})
 			}
 			context.Send(currentActor.Instructor, &messages.TraverseResult{Values: result})
 		}
 	}
 
+}
+
+func sortValues(Values map[int]string) []int {
+	var keys []int
+	for k := range Values {
+		keys = append(keys, k)
+	}
+	sort.Ints(keys)
+	return keys
 }

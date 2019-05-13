@@ -68,10 +68,10 @@ func (node *NodeActor) Receive(context actor.Context) {
 			fmt.Printf("Left Max Key is %d\n", node.LeftMaxKey)
 			for k, v := range node.Values {
 				if k <= sortedKeys[(len(sortedKeys)/2)-1] {
-					fmt.Printf("Adding to left side: key=%d, value=%s", k, v)
+					fmt.Printf("Adding to left side: key=%d, value=%s\n", k, v)
 					context.Send(node.LeftNode, &Add{Instructor: context.Self(), Key: k, Value: v})
 				} else {
-					fmt.Printf("Adding to right side: key=%d, value=%s", k, v)
+					fmt.Printf("Adding to right side: key=%d, value=%s\n", k, v)
 					context.Send(node.RightNode, &Add{Instructor: context.Self(), Key: k, Value: v})
 				}
 			}
