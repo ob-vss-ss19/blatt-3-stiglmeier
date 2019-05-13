@@ -5,5 +5,5 @@ RUN go build -o treecli/main treecli/main.go
 
 FROM iron/go
 COPY --from=builder /app/treecli/main /app/treecli
-EXPOSE 8091
+EXPOSE 8090
 ENTRYPOINT [ "/app/treecli" ]
