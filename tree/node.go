@@ -69,7 +69,7 @@ func (node *NodeActor) Receive(context actor.Context) {
 			node.Values = nil
 		}
 		context.Send(msg.Instructor, &messages.Success{})
-	case Find:
+	case *Find:
 		if node.LeftNode != nil {
 			context.Send(node.LeftNode, msg)
 			context.Send(node.RightNode, msg)
