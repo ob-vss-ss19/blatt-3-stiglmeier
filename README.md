@@ -1,3 +1,29 @@
+## Abgabe
+
+-   In der IDE starten 
+
+oder
+
+-   Mit Docker
+    1. Docker images herunterladen: 
+        ``` 
+        docker pull terraform.cs.hm.edu:5043/ob-vss-ss19-blatt-3-stiglmeier:develop-treeservice
+        docker pull terraform.cs.hm.edu:5043/ob-vss-ss19-blatt-3-stiglmeier:develop-treecli
+        ```    
+    2. Docker netwerk erstellen
+        ```
+        docker network create actors
+        ```
+    3. Docker images starten
+        ```
+        docker run --rm --net actors --name treeservice terraform.cs.hm.edu:5043/ob-vss-ss19-blatt-3-stiglmeier:develop-treeservice --bind="treeservice.actors:8091"
+        docker run --rm --net actors --name treecli terraform.cs.hm.edu:5043/ob-vss-ss19-blatt-3-stiglmeier:develop-treecli --bind="treecli.actors:8090 --remote="treeservice.actors:8091"
+        ```
+
+
+
+
+-----------------------
 ## Ausführen mit Docker
 
 -   Images bauen
