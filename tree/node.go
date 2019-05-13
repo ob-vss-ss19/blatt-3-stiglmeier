@@ -89,6 +89,7 @@ func (node *NodeActor) Receive(context actor.Context) {
 		} else {
 			for k, v := range node.Values {
 				if k == msg.Key && v == msg.Value {
+					fmt.Printf("Looking Through: key=%d, value=%s", k, v)
 					if msg.Delete {
 						delete(node.Values, k)
 					}
