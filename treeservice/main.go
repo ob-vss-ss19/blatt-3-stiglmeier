@@ -46,10 +46,10 @@ func (currentActor *ServiceActor) Receive(context actor.Context) {
 		currentActor.nextId++
 		currentActor.token = newToken()
 
-		currentActor.rootNode = context.Spawn(actor.PropsFromProducer(func() actor.Actor {
-			return &tree.NodeActor{LeafSize: int(msg.MaxLeafSize)}
-		}))
-
+		props := actor.PropsFromProducer(func() actor.Actor {
+			return &tree.NodeActor{LeafSize: int(msg.MaxLeafSize), LeftNode: nil, RightNode: nil, Values: make(map[int]string)}
+		})
+		currentActor.rootNode = context.Spawn(props)
 		context.Respond(&messages.TreeData{Token: currentActor.token, Id: int32(currentActor.id)})
 		fmt.Printf("responded to new tree with size %d...\n", msg.MaxLeafSize)
 	case *messages.AddPair:
@@ -57,6 +57,7 @@ func (currentActor *ServiceActor) Receive(context actor.Context) {
 			context.Respond(&messages.Failure{"Id or Token Mismatch!"})
 			return
 		}
+		fmt.Printf("target pid: %s, %s\n", currentActor.rootNode.Id, currentActor.rootNode.Address)
 		context.Send(currentActor.rootNode, &tree.Add{Instructor: context.Sender(), Key: int(msg.Key), Value: msg.Value})
 		fmt.Printf("instructed tree to add\n")
 	case *messages.RemovePair:
@@ -89,7 +90,11 @@ func (currentActor *ServiceActor) Receive(context actor.Context) {
 			context.Respond(&messages.Failure{"Id or Token Mismatch!"})
 			return
 		}
-		context.Send(currentActor.rootNode, &tree.Traverse{Instructor: context.Sender()})
+		props := actor.PropsFromProducer(func() actor.Actor {
+			return &TraverseActor{Instructor: context.Sender(), Values: make(map[int]string), OpenNodes: 0}
+		})
+		pid := context.Spawn(props)
+		context.Send(pid, &StartTraverse{RootNode: currentActor.rootNode})
 		fmt.Printf("instructed tree to traverse\n")
 	}
 }

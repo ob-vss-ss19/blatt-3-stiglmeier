@@ -26,6 +26,12 @@ type Traverse struct {
 	Instructor *actor.PID
 }
 
+type Data struct {
+	LeftNode  *actor.PID
+	RightNode *actor.PID
+	Values    map[int]string
+}
+
 type NodeActor struct {
 	LeafSize   int
 	LeftNode   *actor.PID
@@ -71,18 +77,34 @@ func (node *NodeActor) Receive(context actor.Context) {
 		context.Send(msg.Instructor, &messages.Success{})
 	case *Find:
 		if node.LeftNode != nil {
+
+			if node.LeftMaxKey <= msg.Key {
+				context.Send(node.LeftNode, msg)
+			} else {
+				context.Send(node.RightNode, msg)
+			}
+		} else {
+			for k, v := range node.Values {
+				if k == msg.Key && v == msg.Value {
+					if msg.Delete {
+						delete(node.Values, k)
+					}
+					context.Send(msg.Instructor, &messages.Success{})
+					return
+				}
+			}
+			context.Send(msg.Instructor, &messages.Failure{Cause: "Node not found"})
+		}
+	case *Delete:
+		node.Values = nil
+		if node.LeftNode != nil {
 			context.Send(node.LeftNode, msg)
 			context.Send(node.RightNode, msg)
-			return
 		}
-		for k, v := range node.Values {
-			if k == msg.Key && v == msg.Value {
-				context.Send(msg.Instructor, &messages.Success{})
-			}
-		}
-
-	default:
-		fmt.Printf("invalid message type for node: %s\n", msg)
+		node.LeftNode = nil
+		node.RightNode = nil
+	case *Traverse:
+		context.Send(msg.Instructor, &Data{LeftNode: node.LeftNode, RightNode: node.RightNode, Values: node.Values})
 	}
 
 }
@@ -93,6 +115,5 @@ func sortNode(Values map[int]string) []int {
 		keys = append(keys, k)
 	}
 	sort.Ints(keys)
-
 	return keys
 }
