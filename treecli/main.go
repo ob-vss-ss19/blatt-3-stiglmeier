@@ -103,32 +103,35 @@ func deleteTree() {
 }
 
 func insertNode() {
-	if len(flag.Args()) < 2 {
-		fmt.Printf("ERROR: Please specify the value as second argument.")
+	if len(flag.Args()) < 3 {
+		fmt.Printf("ERROR: Please specify the key/value as second/third argument.")
 		wg.Done()
 		return
 	}
-	message := &messages.NewNumber{Token: *token, Id: int32(*id), Value: flag.Args()[1]}
+	key, _ := strconv.Atoi(flag.Args()[1])
+	message := &messages.AddPair{Token: *token, Id: int32(*id), Key: int32(key), Value: flag.Args()[2]}
 	context.RequestWithCustomSender(spawnedPID, message, pid)
 }
 
 func deletenode() {
-	if len(flag.Args()) < 2 {
-		fmt.Printf("ERROR: Please specify the value as second argument.")
+	if len(flag.Args()) < 3 {
+		fmt.Printf("ERROR: Please specify the key/value as second/third argument.")
 		wg.Done()
 		return
 	}
-	message := &messages.DeleteNumber{Token: *token, Id: int32(*id), Value: flag.Args()[1]}
+	key, _ := strconv.Atoi(flag.Args()[1])
+	message := &messages.RemovePair{Token: *token, Id: int32(*id), Key: int32(key), Value: flag.Args()[2]}
 	context.RequestWithCustomSender(spawnedPID, message, pid)
 }
 
 func existsnode() {
-	if len(flag.Args()) < 2 {
-		fmt.Printf("ERROR: Please specify the value as second argument.")
+	if len(flag.Args()) < 3 {
+		fmt.Printf("ERROR: Please specify the key/value as second/third argument.")
 		wg.Done()
 		return
 	}
-	message := &messages.ExistsNumber{Token: *token, Id: int32(*id), Value: flag.Args()[1]}
+	key, _ := strconv.Atoi(flag.Args()[1])
+	message := &messages.FindPair{Token: *token, Id: int32(*id), Key: int32(key), Value: flag.Args()[2]}
 	context.RequestWithCustomSender(spawnedPID, message, pid)
 }
 
