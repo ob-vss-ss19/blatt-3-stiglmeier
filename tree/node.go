@@ -36,7 +36,7 @@ type NodeActor struct {
 
 func (node *NodeActor) Receive(context actor.Context) {
 	switch msg := context.Message().(type) {
-	case Add:
+	case *Add:
 		fmt.Println("adding...")
 		if node.LeftNode != nil { // no leaf
 			if msg.Key <= node.LeftMaxKey {
