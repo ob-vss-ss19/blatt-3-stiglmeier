@@ -48,8 +48,10 @@ message Failure {
 message Success {
 }
 
-message TraverseResult {
+message NodeData {
     int32 key = 1;
     string value = 2;
-    bool last = 3;
+}
+message TraverseResult {
+    repeated NodeData Values = 1;
 }
