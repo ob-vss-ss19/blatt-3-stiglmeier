@@ -120,17 +120,17 @@ func (currentActor *TraverseActor) Receive(context actor.Context) {
 	case *StartTraverse:
 		fmt.Printf("Started Traversing from Actor\n")
 		context.Send(msg.RootNode, &tree.Traverse{Instructor: context.Self()})
-		currentActor.OpenNodes += currentActor.OpenNodes
+		currentActor.OpenNodes += 1
 	case *tree.Data:
 		fmt.Printf("Traverse Actor got Data...\n")
-		currentActor.OpenNodes -= currentActor.OpenNodes
+		currentActor.OpenNodes -= 1
 		for k, v := range msg.Values {
 			currentActor.Values[k] = v
 		}
 		if msg.RightNode != nil {
 			fmt.Printf("Traverse Actor resending to right node...\n")
 			context.Send(msg.RightNode, &tree.Traverse{Instructor: context.Self()})
-			currentActor.OpenNodes += currentActor.OpenNodes
+			currentActor.OpenNodes += 1
 		}
 		if msg.LeftNode != nil {
 			fmt.Printf("Traverse Actor resending to left node...\n")

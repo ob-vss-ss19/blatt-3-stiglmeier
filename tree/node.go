@@ -81,7 +81,7 @@ func (node *NodeActor) Receive(context actor.Context) {
 	case *Find:
 		fmt.Println("finding...")
 		if node.LeftNode != nil {
-			if node.LeftMaxKey <= msg.Key {
+			if node.LeftMaxKey >= msg.Key {
 				fmt.Println("Searching again on left side")
 				context.Send(node.LeftNode, msg)
 			} else {
