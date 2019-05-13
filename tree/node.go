@@ -3,22 +3,22 @@ package tree
 import "github.com/AsynkronIT/protoactor-go/actor"
 
 type Add struct {
-	instructor *actor.PID
-	key        int
-	value      string
+	Instructor *actor.PID
+	Key        int
+	Value      string
 }
 
 type Find struct {
-	instructor *actor.PID
-	key        int
-	value      string
-	delete     bool
+	Instructor *actor.PID
+	Key        int
+	Value      string
+	Delete     bool
 }
 
 type Delete struct{}
 
 type Traverse struct {
-	instructor *actor.PID
+	Instructor *actor.PID
 }
 
 type NodeActor struct {
